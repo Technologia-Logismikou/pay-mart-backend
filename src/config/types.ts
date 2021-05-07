@@ -5,3 +5,7 @@ export type DatabaseConfig = {
   password: string;
   name: string;
 };
+
+export type FrontendConfig = {
+  url: string;
+};

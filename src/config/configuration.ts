@@ -8,6 +8,6 @@ export default () => ({
     name: process.env.DATABASE_NAME,
   },
   FRONTEND: {
-    url: process.env.FRONTEND_URL,
+    url: process.env.FRONTEND_URL || 'http://localhost:4200',
   },
 });
