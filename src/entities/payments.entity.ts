@@ -1,15 +1,14 @@
-import { Entity, Column } from 'typeorm';
+import { Column } from 'typeorm';
 import { BaseEntity } from './base-entity';
 
-@Entity()
 export abstract class Payment extends BaseEntity {
-  // TODO: Relation with User
+  // TODO: Relation with Customer
   @Column()
-  from: string;
+  customer: string;
 
-  // TODO: Relation with User
+  // TODO: Relation with Seller
   @Column()
-  to: string;
+  seller: string;
 
   @Column()
   amount: number;

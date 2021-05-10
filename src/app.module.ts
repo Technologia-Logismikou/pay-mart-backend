@@ -1,3 +1,8 @@
+// Entity imports for TypeORM
+import { Product } from './products/products.entity';
+import { Store } from './stores/stores.entity';
+import { Order } from './orders/orders.entity';
+
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
@@ -5,10 +10,7 @@ import config from './config/configuration';
 import { DatabaseConfig } from './config/types';
 import { ProductsModule } from './products/products.module';
 import { StoresModule } from './stores/stores.module';
-
-// Entity imports for TypeORM
-import { Product } from './products/products.entity';
-import { Store } from './stores/stores.entity';
+import { OrdersModule } from './orders/orders.module';
 
 @Module({
   imports: [
@@ -25,7 +27,7 @@ import { Store } from './stores/stores.entity';
           password: databaseConfig.password,
           port: databaseConfig.port,
           type: 'postgres',
-          entities: [Product, Store],
+          entities: [Product, Store, Order],
           synchronize: configService.get('ENV') === 'development',
         };
       },
@@ -33,6 +35,7 @@ import { Store } from './stores/stores.entity';
     }),
     ProductsModule,
     StoresModule,
+    OrdersModule,
   ],
   controllers: [],
   providers: [],
