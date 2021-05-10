@@ -3,6 +3,8 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import config from './config/configuration';
 import { DatabaseConfig } from './config/types';
+import { ProductsModule } from './products/products.module';
+import { Product } from './products/products.entity';
 
 @Module({
   imports: [
@@ -19,12 +21,13 @@ import { DatabaseConfig } from './config/types';
           password: databaseConfig.password,
           port: databaseConfig.port,
           type: 'postgres',
-          entities: [],
+          entities: [Product],
           synchronize: configService.get('ENV') === 'development',
         };
       },
       inject: [ConfigService],
     }),
+    ProductsModule,
   ],
   controllers: [],
   providers: [],
