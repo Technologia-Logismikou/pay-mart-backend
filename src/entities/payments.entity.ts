@@ -1,5 +1,5 @@
 import { Entity, Column } from 'typeorm';
-import { BaseEntity } from '../entity/entity';
+import { BaseEntity } from './base-entity';
 
 @Entity()
 export abstract class Payment extends BaseEntity {
