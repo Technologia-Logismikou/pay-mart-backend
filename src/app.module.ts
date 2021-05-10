@@ -4,7 +4,11 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import config from './config/configuration';
 import { DatabaseConfig } from './config/types';
 import { ProductsModule } from './products/products.module';
+import { StoresModule } from './stores/stores.module';
+
+// Entity imports for TypeORM
 import { Product } from './products/products.entity';
+import { Store } from './stores/stores.entity';
 
 @Module({
   imports: [
@@ -21,13 +25,14 @@ import { Product } from './products/products.entity';
           password: databaseConfig.password,
           port: databaseConfig.port,
           type: 'postgres',
-          entities: [Product],
+          entities: [Product, Store],
           synchronize: configService.get('ENV') === 'development',
         };
       },
       inject: [ConfigService],
     }),
     ProductsModule,
+    StoresModule,
   ],
   controllers: [],
   providers: [],
