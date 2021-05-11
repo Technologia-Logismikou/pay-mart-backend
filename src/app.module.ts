@@ -6,6 +6,7 @@ import { Refund } from './refunds/refunds.entity';
 import { ShippingZone } from './shipping-zones/shipping-zones.entity';
 import { User } from './users/users.entity';
 import { Seller } from './sellers/sellers.entity';
+import { Category } from './categories/categories.entity';
 
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
@@ -19,6 +20,7 @@ import { RefundsModule } from './refunds/refunds.module';
 import { ShippingZonesModule } from './shipping-zones/shipping-zones.module';
 import { UsersModule } from './users/users.module';
 import { SellersModule } from './sellers/sellers.module';
+import { CategoriesModule } from './categories/categories.module';
 
 @Module({
   imports: [
@@ -35,7 +37,16 @@ import { SellersModule } from './sellers/sellers.module';
           password: databaseConfig.password,
           port: databaseConfig.port,
           type: 'postgres',
-          entities: [Product, Store, Order, Refund, ShippingZone, User, Seller],
+          entities: [
+            Product,
+            Store,
+            Order,
+            Refund,
+            ShippingZone,
+            User,
+            Seller,
+            Category,
+          ],
           synchronize: configService.get('ENV') === 'development',
         };
       },
@@ -48,6 +59,7 @@ import { SellersModule } from './sellers/sellers.module';
     ShippingZonesModule,
     UsersModule,
     SellersModule,
+    CategoriesModule,
   ],
   controllers: [],
   providers: [],

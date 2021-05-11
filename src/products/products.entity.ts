@@ -7,6 +7,10 @@ export class Product extends BaseEntity {
   @Column()
   store: string;
 
+  // TODO: Relation with Category
+  @Column()
+  category: string;
+
   @Column()
   name: string;
 
