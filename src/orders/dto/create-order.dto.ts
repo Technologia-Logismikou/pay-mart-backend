@@ -1,3 +1,4 @@
+// TODO: Add payment data to this dto
 export class CreateOrderDto {
   customer: string;
   seller: string;
