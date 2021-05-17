@@ -1,5 +1,7 @@
-import { ChildEntity, Column } from 'typeorm';
+import { ChildEntity, Column, OneToOne, OneToMany, JoinColumn } from 'typeorm';
 import { User } from '../users/users.entity';
+import { Store } from '../stores/stores.entity';
+import { Payment } from '../entities/payments.entity';
 
 @ChildEntity()
 export class Seller extends User {
@@ -7,9 +9,9 @@ export class Seller extends User {
   @Column()
   token: string;
 
-  // TODO: Relation with Store
-  @Column()
-  store: string;
+  @OneToOne(() => Store)
+  @JoinColumn()
+  store: Store;
 
   @Column()
   phone: string;

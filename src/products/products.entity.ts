@@ -1,13 +1,12 @@
-import { Entity, Column } from 'typeorm';
+import { Entity, Column, ManyToOne } from 'typeorm';
 import { BaseEntity } from '../entities/base-entity';
+import { Store } from '../stores/stores.entity';
 
 @Entity()
 export class Product extends BaseEntity {
-  // TODO: Relation with Store
-  @Column()
-  store: string;
+  @ManyToOne(() => Store, (store) => store.products)
+  store: Store;
 
-  // TODO: Relation with Category
   @Column()
   category: string;
 

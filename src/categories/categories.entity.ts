@@ -1,12 +1,26 @@
-import { Entity, Tree, Column, TreeChildren, TreeParent } from 'typeorm';
+import {
+  Entity,
+  Tree,
+  Column,
+  TreeChildren,
+  TreeParent,
+  ManyToOne,
+  ManyToMany,
+  JoinTable,
+} from 'typeorm';
 import { BaseEntity } from '../entities/base-entity';
+import { Store } from '../stores/stores.entity';
+import { Product } from '../products/products.entity';
 
 @Entity()
 @Tree('materialized-path')
 export class Category extends BaseEntity {
-  // TODO: Relation with Store
-  @Column()
-  store: string;
+  @ManyToOne(() => Store, (store) => store.categories)
+  store: Store;
+
+  @ManyToMany(() => Product)
+  @JoinTable()
+  products: Product[];
 
   @Column()
   name: string;

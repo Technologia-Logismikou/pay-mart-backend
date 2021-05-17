@@ -1,5 +1,6 @@
-import { Entity, Column } from 'typeorm';
+import { Entity, Column, ManyToMany, JoinTable } from 'typeorm';
 import { Payment } from '../entities/payments.entity';
+import { Product } from '../products/products.entity';
 
 @Entity()
 export class Order extends Payment {
@@ -8,14 +9,13 @@ export class Order extends Payment {
   token: string;
 
   // TODO: Relation with Coupon
-  @Column()
-  coupon: string;
+  // @Column()
+  // coupon: string;
 
-  // TODO: Relation with Product
-  @Column('varchar', { array: true })
-  products: string[];
+  @ManyToMany(() => Product)
+  @JoinTable()
+  products: Product[];
 
-  // TODO: Relation with County
   @Column()
   county: string;
 

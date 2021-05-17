@@ -1,12 +1,14 @@
-import { Column } from 'typeorm';
+import { Column, ManyToOne } from 'typeorm';
 import { BaseEntity } from './base-entity';
+import { Seller } from '../sellers/sellers.entity';
+import { User } from '../users/users.entity';
 
 export abstract class Payment extends BaseEntity {
   // TODO: Relation with Customer
   @Column()
   customer: string;
 
-  // TODO: Relation with Seller
+  // @ManyToOne(() => User, (user) => user.payments)
   @Column()
   seller: string;
 

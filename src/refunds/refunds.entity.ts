@@ -1,5 +1,6 @@
-import { Entity, Column } from 'typeorm';
+import { Entity, Column, OneToOne, JoinColumn } from 'typeorm';
 import { Payment } from '../entities/payments.entity';
+import { Order } from '../orders/orders.entity';
 
 @Entity()
 export class Refund extends Payment {
@@ -7,9 +8,9 @@ export class Refund extends Payment {
   @Column()
   token: string;
 
-  // TODO: Relation with Order
-  @Column()
-  order: string;
+  @OneToOne(() => Order)
+  @JoinColumn()
+  order: Order;
 
   @Column()
   fee: number;
