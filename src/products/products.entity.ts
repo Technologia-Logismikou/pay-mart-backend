@@ -4,30 +4,30 @@ import { Store } from '../stores/stores.entity';
 
 @Entity()
 export class Product extends BaseEntity {
-  @ManyToOne(() => Store, (store) => store.products)
+  @ManyToOne(() => Store, (store) => store.products, { nullable: true })
   store: Store;
 
-  @Column()
+  @Column({ nullable: true })
   category: string;
 
-  @Column()
+  @Column({ nullable: true })
   name: string;
 
-  @Column()
+  @Column({ nullable: true })
   description: string;
 
-  @Column()
+  @Column({ nullable: true })
   price: number;
 
-  @Column('varchar', { array: true })
+  @Column('varchar', { array: true, nullable: true })
   photos: string[];
 
-  @Column({ default: true })
+  @Column({ default: true, nullable: true })
   public: boolean;
 
-  @Column()
+  @Column({ nullable: true })
   url: string;
 
-  @Column()
+  @Column({ nullable: true })
   slug: string;
 }

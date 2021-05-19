@@ -15,14 +15,14 @@ import { Product } from '../products/products.entity';
 @Entity()
 @Tree('materialized-path')
 export class Category extends BaseEntity {
-  @ManyToOne(() => Store, (store) => store.categories)
+  @ManyToOne(() => Store, (store) => store.categories, { nullable: true })
   store: Store;
 
-  @ManyToMany(() => Product)
+  @ManyToMany(() => Product, { nullable: true })
   @JoinTable()
   products: Product[];
 
-  @Column()
+  @Column({ nullable: true })
   name: string;
 
   @TreeChildren()

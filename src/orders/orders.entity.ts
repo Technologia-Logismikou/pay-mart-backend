@@ -1,27 +1,38 @@
-import { Entity, Column, ManyToMany, JoinTable } from 'typeorm';
-import { Payment } from '../entities/payments.entity';
+import { Entity, Column, ManyToMany, ManyToOne, JoinTable } from 'typeorm';
+import { BaseEntity } from '../entities/base-entity';
 import { Product } from '../products/products.entity';
+import { Seller } from '../sellers/sellers.entity';
 
 @Entity()
-export class Order extends Payment {
+export class Order extends BaseEntity {
+  // TODO: Possible relation with Customer, just email for now
+  @Column({ nullable: true })
+  customer: string;
+
+  @Column({ nullable: true })
+  amount: number;
+
   // Everypay token
-  @Column()
+  @Column({ nullable: true })
   token: string;
 
   // TODO: Relation with Coupon
-  // @Column()
+  // @Column({ nullable: true })
   // coupon: string;
 
-  @ManyToMany(() => Product)
+  @ManyToOne(() => Seller, (seller) => seller.orders, { nullable: true })
+  seller: Seller;
+
+  @ManyToMany(() => Product, { nullable: true })
   @JoinTable()
   products: Product[];
 
-  @Column()
+  @Column({ nullable: true })
   county: string;
 
-  @Column()
+  @Column({ nullable: true })
   shippingAddress: string;
 
-  @Column()
+  @Column({ nullable: true })
   billingAddress: string;
 }

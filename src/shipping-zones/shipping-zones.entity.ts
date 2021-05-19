@@ -4,15 +4,15 @@ import { Store } from '../stores/stores.entity';
 
 @Entity()
 export class ShippingZone extends BaseEntity {
-  @ManyToOne(() => Store, (store) => store.categories)
+  @ManyToOne(() => Store, (store) => store.shippingZones, { nullable: true })
   store: Store;
 
-  @Column()
+  @Column({ nullable: true })
   name: string;
 
-  @Column('varchar', { array: true })
+  @Column('varchar', { array: true, nullable: true })
   counties: string[];
 
-  @Column()
+  @Column({ nullable: true })
   rate: number;
 }

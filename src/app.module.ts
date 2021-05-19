@@ -4,7 +4,6 @@ import { Store } from './stores/stores.entity';
 import { Order } from './orders/orders.entity';
 import { Refund } from './refunds/refunds.entity';
 import { ShippingZone } from './shipping-zones/shipping-zones.entity';
-import { User } from './users/users.entity';
 import { Seller } from './sellers/sellers.entity';
 import { Category } from './categories/categories.entity';
 
@@ -18,7 +17,6 @@ import { StoresModule } from './stores/stores.module';
 import { OrdersModule } from './orders/orders.module';
 import { RefundsModule } from './refunds/refunds.module';
 import { ShippingZonesModule } from './shipping-zones/shipping-zones.module';
-import { UsersModule } from './users/users.module';
 import { SellersModule } from './sellers/sellers.module';
 import { CategoriesModule } from './categories/categories.module';
 
@@ -38,11 +36,10 @@ import { CategoriesModule } from './categories/categories.module';
           port: databaseConfig.port,
           type: 'postgres',
           entities: [
-            User,
-            Seller,
             Product,
             Store,
             Order,
+            Seller,
             Refund,
             ShippingZone,
             Category,
@@ -57,7 +54,6 @@ import { CategoriesModule } from './categories/categories.module';
     OrdersModule,
     RefundsModule,
     ShippingZonesModule,
-    UsersModule,
     SellersModule,
     CategoriesModule,
   ],

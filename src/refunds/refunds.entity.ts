@@ -1,17 +1,17 @@
 import { Entity, Column, OneToOne, JoinColumn } from 'typeorm';
-import { Payment } from '../entities/payments.entity';
+import { BaseEntity } from '../entities/base-entity';
 import { Order } from '../orders/orders.entity';
 
 @Entity()
-export class Refund extends Payment {
+export class Refund extends BaseEntity {
   // Everypay token
-  @Column()
+  @Column({ nullable: true })
   token: string;
 
-  @OneToOne(() => Order)
+  @OneToOne(() => Order, { nullable: true })
   @JoinColumn()
   order: Order;
 
-  @Column()
+  @Column({ nullable: true })
   fee: number;
 }

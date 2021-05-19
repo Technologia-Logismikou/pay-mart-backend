@@ -1,18 +1,30 @@
-import { ChildEntity, Column, OneToOne, OneToMany, JoinColumn } from 'typeorm';
-import { User } from '../users/users.entity';
+import { Entity, Column, OneToOne, JoinColumn, OneToMany } from 'typeorm';
+import { BaseEntity } from '../entities/base-entity';
 import { Store } from '../stores/stores.entity';
-import { Payment } from '../entities/payments.entity';
+import { Order } from '../orders/orders.entity';
 
-@ChildEntity()
-export class Seller extends User {
+@Entity()
+export class Seller extends BaseEntity {
+  @Column({ nullable: true })
+  email: string;
+
+  @Column({ nullable: true })
+  password: string;
+
   // Everypay token
-  @Column()
+  @Column({ nullable: true })
   token: string;
 
-  @OneToOne(() => Store)
+  @OneToOne(() => Store, { nullable: true })
   @JoinColumn()
   store: Store;
 
-  @Column()
+  @Column({ nullable: true })
   phone: string;
+
+  @OneToMany(() => Order, (order) => order.seller, {
+    onDelete: 'CASCADE',
+    nullable: true,
+  })
+  orders: Order[];
 }

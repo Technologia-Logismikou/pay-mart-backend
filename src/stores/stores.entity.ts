@@ -8,37 +8,40 @@ import { ShippingZone } from '../shipping-zones/shipping-zones.entity';
 export class Store extends BaseEntity {
   @OneToMany(() => Category, (category) => category.store, {
     onDelete: 'CASCADE',
+    nullable: true,
   })
   categories: Category[];
 
   @OneToMany(() => Product, (product) => product.store, {
     onDelete: 'CASCADE',
+    nullable: true,
   })
   products: Product[];
 
   @OneToMany(() => ShippingZone, (shippingZone) => shippingZone.store, {
     onDelete: 'CASCADE',
+    nullable: true,
   })
   shippingZones: ShippingZone[];
 
-  @Column()
+  @Column({ nullable: true })
   name: string;
 
-  @Column()
+  @Column({ nullable: true })
   address: string;
 
-  @Column()
+  @Column({ nullable: true })
   phone: string;
 
-  @Column()
+  @Column({ nullable: true })
   email: string;
 
-  @Column()
+  @Column({ nullable: true })
   logo: string;
 
-  @Column()
+  @Column({ nullable: true })
   subdomain: string;
 
-  @Column()
+  @Column({ nullable: true })
   website: string;
 }
