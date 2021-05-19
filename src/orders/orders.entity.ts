@@ -2,6 +2,7 @@ import { Entity, Column, ManyToMany, ManyToOne, JoinTable } from 'typeorm';
 import { BaseEntity } from '../entities/base-entity';
 import { Product } from '../products/products.entity';
 import { Seller } from '../sellers/sellers.entity';
+import { Coupon } from '../coupons/coupons.entity';
 
 @Entity()
 export class Order extends BaseEntity {
@@ -16,16 +17,16 @@ export class Order extends BaseEntity {
   @Column({ nullable: true })
   token: string;
 
-  // TODO: Relation with Coupon
-  // @Column({ nullable: true })
-  // coupon: string;
-
   @ManyToOne(() => Seller, (seller) => seller.orders, { nullable: true })
   seller: Seller;
 
   @ManyToMany(() => Product, { nullable: true })
   @JoinTable()
   products: Product[];
+
+  @ManyToMany(() => Coupon, { nullable: true })
+  @JoinTable()
+  coupons: Coupon[];
 
   @Column({ nullable: true })
   county: string;

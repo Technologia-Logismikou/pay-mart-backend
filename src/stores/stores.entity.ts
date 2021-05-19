@@ -3,6 +3,7 @@ import { BaseEntity } from '../entities/base-entity';
 import { Category } from '../categories/categories.entity';
 import { Product } from '../products/products.entity';
 import { ShippingZone } from '../shipping-zones/shipping-zones.entity';
+import { Coupon } from '../coupons/coupons.entity';
 
 @Entity()
 export class Store extends BaseEntity {
@@ -23,6 +24,12 @@ export class Store extends BaseEntity {
     nullable: true,
   })
   shippingZones: ShippingZone[];
+
+  @OneToMany(() => Coupon, (coupon) => coupon.store, {
+    onDelete: 'CASCADE',
+    nullable: true,
+  })
+  coupons: Coupon[];
 
   @Column({ nullable: true })
   name: string;

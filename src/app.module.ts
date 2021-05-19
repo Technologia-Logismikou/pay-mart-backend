@@ -6,6 +6,7 @@ import { Refund } from './refunds/refunds.entity';
 import { ShippingZone } from './shipping-zones/shipping-zones.entity';
 import { Seller } from './sellers/sellers.entity';
 import { Category } from './categories/categories.entity';
+import { Coupon } from './coupons/coupons.entity';
 
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
@@ -19,6 +20,7 @@ import { RefundsModule } from './refunds/refunds.module';
 import { ShippingZonesModule } from './shipping-zones/shipping-zones.module';
 import { SellersModule } from './sellers/sellers.module';
 import { CategoriesModule } from './categories/categories.module';
+import { CouponsModule } from './coupons/coupons.module';
 
 @Module({
   imports: [
@@ -43,6 +45,7 @@ import { CategoriesModule } from './categories/categories.module';
             Refund,
             ShippingZone,
             Category,
+            Coupon,
           ],
           synchronize: configService.get('ENV') === 'development',
         };
@@ -56,6 +59,7 @@ import { CategoriesModule } from './categories/categories.module';
     ShippingZonesModule,
     SellersModule,
     CategoriesModule,
+    CouponsModule,
   ],
   controllers: [],
   providers: [],
