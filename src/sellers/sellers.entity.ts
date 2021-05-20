@@ -5,6 +5,8 @@ import { Order } from '../orders/orders.entity';
 
 @Entity()
 export class Seller extends BaseEntity {
+  // TODO: Test the unique functionality
+
   @Column({ nullable: true })
   email: string;
 
