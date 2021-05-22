@@ -5,6 +5,12 @@ import { Order } from '../orders/orders.entity';
 
 @Entity()
 export class Seller extends BaseEntity {
+  /**
+   * TODO:
+   * - Test the unique functionality
+   * - Add name property
+   */
+
   @Column({ nullable: true })
   email: string;
 
