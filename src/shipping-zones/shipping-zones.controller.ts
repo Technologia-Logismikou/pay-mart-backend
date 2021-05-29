@@ -22,6 +22,24 @@ export class ShippingZonesController {
         return this.ShippingZonesService.create(CreateShippingZoneDto);
     }
 
-    
+    @Get()
+    findAll() {
+        return this.ShippingZonesService.findAll();
+    }
+
+    @Get(':id')
+    findOne(@Param('id') id: string) {
+        return this.ShippingZonesService.findOne(id);
+    }
+
+    @Put(':id')
+    update(@Param('id') id: string, @Body() UpdateShippingZoneDto: UpdateShippingZoneDto) {
+        return this.ShippingZonesService.update(id, UpdateShippingZoneDto);
+    }
+
+    @Delete(':id')
+    remove(@Param('id') id: string) {
+        return this.ShippingZonesService.remove(id);
+    }
 
 }

@@ -18,7 +18,21 @@ create(CreateShippingZoneDto: CreateShippingZoneDto) {
   return this.shippingZonesRepository.save(shippingzone);
 }
 
+findAll() {
+  return this.shippingZonesRepository.find();
+}
 
+findOne(id: string) {
+  return this.shippingZonesRepository.findOne(id);
+}
+
+update(id: string, UpdateShippingZoneDto: UpdateShippingZoneDto) { 
+  return this.shippingZonesRepository.update(id, UpdateShippingZoneDto);
+}
+
+remove(id: string) {
+  return this.shippingZonesRepository.delete(id);
+}
 
 
 }
