@@ -5,7 +5,6 @@ import { ShippingZone } from './shipping-zones.entity';
 import { CreateShippingZoneDto } from './dto/create-shipping-zone.dto';
 import { UpdateShippingZoneDto } from './dto/update-shipping-zone.dto';
 
-
 @Injectable()
 export class ShippingZonesService {
   constructor(
@@ -13,26 +12,26 @@ export class ShippingZonesService {
     private readonly shippingZonesRepository: Repository<ShippingZone>,
   ) {}
 
-create(CreateShippingZoneDto: CreateShippingZoneDto) {
-  const shippingzone = this.shippingZonesRepository.create(CreateShippingZoneDto);
-  return this.shippingZonesRepository.save(shippingzone);
-}
+  create(createShippingZoneDto: CreateShippingZoneDto) {
+    const shippingzone = this.shippingZonesRepository.create(
+      createShippingZoneDto,
+    );
+    return this.shippingZonesRepository.save(shippingzone);
+  }
 
-findAll() {
-  return this.shippingZonesRepository.find();
-}
+  findAll() {
+    return this.shippingZonesRepository.find();
+  }
 
-findOne(id: string) {
-  return this.shippingZonesRepository.findOne(id);
-}
+  findOne(id: string) {
+    return this.shippingZonesRepository.findOne(id);
+  }
 
-update(id: string, UpdateShippingZoneDto: UpdateShippingZoneDto) { 
-  return this.shippingZonesRepository.update(id, UpdateShippingZoneDto);
-}
+  update(id: string, updateShippingZoneDto: UpdateShippingZoneDto) {
+    return this.shippingZonesRepository.update(id, updateShippingZoneDto);
+  }
 
-remove(id: string) {
-  return this.shippingZonesRepository.delete(id);
-}
-
-
+  remove(id: string) {
+    return this.shippingZonesRepository.delete(id);
+  }
 }

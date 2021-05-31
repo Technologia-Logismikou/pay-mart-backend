@@ -1,11 +1,11 @@
-import { 
-    Controller,
-    Get,
-    Post,
-    Put,
-    Delete,
-    Body,
-    Param,
+import {
+  Controller,
+  Get,
+  Post,
+  Put,
+  Delete,
+  Body,
+  Param,
 } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { ShippingZonesService } from './shipping-zones.service';
@@ -15,31 +15,33 @@ import { UpdateShippingZoneDto } from './dto/update-shipping-zone.dto';
 @ApiTags('Shipping Zones')
 @Controller('shipping-zones')
 export class ShippingZonesController {
-    constructor(private readonly ShippingZonesService: ShippingZonesService) {}
+  constructor(private readonly shippingZonesService: ShippingZonesService) {}
 
-    @Post()
-    create(@Body() CreateShippingZoneDto: CreateShippingZoneDto) {
-        return this.ShippingZonesService.create(CreateShippingZoneDto);
-    }
+  @Post()
+  create(@Body() createShippingZoneDto: CreateShippingZoneDto) {
+    return this.shippingZonesService.create(createShippingZoneDto);
+  }
 
-    @Get()
-    findAll() {
-        return this.ShippingZonesService.findAll();
-    }
+  @Get()
+  findAll() {
+    return this.shippingZonesService.findAll();
+  }
 
-    @Get(':id')
-    findOne(@Param('id') id: string) {
-        return this.ShippingZonesService.findOne(id);
-    }
+  @Get(':id')
+  findOne(@Param('id') id: string) {
+    return this.shippingZonesService.findOne(id);
+  }
 
-    @Put(':id')
-    update(@Param('id') id: string, @Body() UpdateShippingZoneDto: UpdateShippingZoneDto) {
-        return this.ShippingZonesService.update(id, UpdateShippingZoneDto);
-    }
+  @Put(':id')
+  update(
+    @Param('id') id: string,
+    @Body() updateShippingZoneDto: UpdateShippingZoneDto,
+  ) {
+    return this.shippingZonesService.update(id, updateShippingZoneDto);
+  }
 
-    @Delete(':id')
-    remove(@Param('id') id: string) {
-        return this.ShippingZonesService.remove(id);
-    }
-
+  @Delete(':id')
+  remove(@Param('id') id: string) {
+    return this.shippingZonesService.remove(id);
+  }
 }

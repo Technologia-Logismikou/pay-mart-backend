@@ -1,7 +1,6 @@
-import { ApiProperty } from '@nestjs/swagger'
+import { ApiProperty } from '@nestjs/swagger';
 
 export class CreateShippingZoneDto {
-
   @ApiProperty()
   name: string;
 
@@ -10,6 +9,4 @@ export class CreateShippingZoneDto {
 
   @ApiProperty()
   rate: number;
-
-
 }
