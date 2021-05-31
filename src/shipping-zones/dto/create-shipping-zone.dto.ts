@@ -6,14 +6,10 @@ export class CreateShippingZoneDto {
   name: string;
 
   @ApiProperty()
-  countries: string[];
+  counties: string[];
 
   @ApiProperty()
   rate: number;
 
-  /*
-  name: string;
-  counties: string[];
-  rate: number;
-  */
+
 }

@@ -12,7 +12,7 @@ import { ShippingZonesService } from './shipping-zones.service';
 import { CreateShippingZoneDto } from './dto/create-shipping-zone.dto';
 import { UpdateShippingZoneDto } from './dto/update-shipping-zone.dto';
 
-@ApiTags('Shipping-zones')
+@ApiTags('Shipping Zones')
 @Controller('shipping-zones')
 export class ShippingZonesController {
     constructor(private readonly ShippingZonesService: ShippingZonesService) {}
