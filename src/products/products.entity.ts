@@ -8,9 +8,6 @@ export class Product extends BaseEntity {
   store: Store;
 
   @Column({ nullable: true })
-  category: string;
-
-  @Column({ nullable: true })
   name: string;
 
   @Column({ nullable: true })

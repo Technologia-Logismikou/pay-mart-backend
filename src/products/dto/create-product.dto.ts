@@ -7,4 +7,5 @@ export class CreateProductDto {
   photos: string[];
   public: boolean;
   url: string;
+  slug: string;
 }
