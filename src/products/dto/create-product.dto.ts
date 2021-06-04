@@ -17,8 +17,12 @@ export class CreateProductDto {
   @ApiProperty()
   photos: string[];
 
-  
+  @ApiProperty()
   public: boolean;
+
+  @ApiProperty()
   url: string;
+
+  @ApiProperty()
   slug: string;
 }
