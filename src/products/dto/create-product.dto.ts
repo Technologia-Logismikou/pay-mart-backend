@@ -1,5 +1,5 @@
 // Only list the properties that need to be sent by the seller
-import {ApiProperty} from '@nestjs/swagger';
+import { ApiProperty } from '@nestjs/swagger';
 
 export class CreateProductDto {
   @ApiProperty()

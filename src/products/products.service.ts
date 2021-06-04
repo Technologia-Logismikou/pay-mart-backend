@@ -4,7 +4,7 @@ import { Repository } from 'typeorm';
 import { Product } from './products.entity';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
- 
+
 @Injectable()
 export class ProductsService {
   constructor(
@@ -32,5 +32,4 @@ export class ProductsService {
   remove(id: string) {
     return this.productsRepository.delete(id);
   }
-
 }
