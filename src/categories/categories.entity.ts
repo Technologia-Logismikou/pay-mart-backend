@@ -12,8 +12,9 @@ import { BaseEntity } from '../entities/base-entity';
 import { Store } from '../stores/stores.entity';
 import { Product } from '../products/products.entity';
 
+// TODO: Add nested categories, only top level for now
 @Entity()
-@Tree('materialized-path')
+// @Tree('materialized-path')
 export class Category extends BaseEntity {
   @ManyToOne(() => Store, (store) => store.categories, { nullable: true })
   store: Store;
@@ -25,9 +26,9 @@ export class Category extends BaseEntity {
   @Column({ nullable: true })
   name: string;
 
-  @TreeChildren()
-  children: Category[];
+  // @TreeChildren()
+  // children: Category[];
 
-  @TreeParent()
-  parent: Category;
+  // @TreeParent()
+  // parent: Category;
 }

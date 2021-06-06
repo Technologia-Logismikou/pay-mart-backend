@@ -1,5 +1,6 @@
+import { ApiProperty } from '@nestjs/swagger';
+
 export class CreateCategoryDto {
+  @ApiProperty()
   name: string;
-  children: string[];
-  parent: string;
 }
