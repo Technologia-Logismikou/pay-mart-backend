@@ -6,6 +6,7 @@ import {
   Delete,
   Body,
   Param,
+  InternalServerErrorException,
 } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { omit } from 'lodash';
@@ -28,12 +29,14 @@ export class SellersController {
      * Create seller and store on register
      * TODO: Connect with 3rd party payment service (Everypay)
      */
-    const { store } = createSellerDto;
-
+    const { store: createStoreDto } = createSellerDto;
     const seller = await this.sellersService.create(
       omit(createSellerDto, 'store', 'bankAccount'),
     );
-    await this.storesService.create(store);
+    await this.storesService.create({
+      ...createStoreDto,
+      seller,
+    });
 
     return seller;
   }
@@ -48,12 +51,12 @@ export class SellersController {
     return this.sellersService.findOne(id);
   }
 
-  @Put()
+  @Put(':id')
   update(@Param('id') id: string, @Body() updateSellerDto: UpdateSellerDto) {
     return this.sellersService.update(id, updateSellerDto);
   }
 
-  @Delete()
+  @Delete(':id')
   remove(@Param('id') id: string) {
     return this.sellersService.remove(id);
   }

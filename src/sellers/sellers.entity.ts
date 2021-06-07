@@ -21,13 +21,6 @@ export class Seller extends BaseEntity {
   @Column({ nullable: true })
   token: string;
 
-  @OneToOne(() => Store, {
-    onDelete: 'CASCADE',
-    nullable: true,
-  })
-  @JoinColumn()
-  store: Store;
-
   @Column({ nullable: true })
   phone: string;
 

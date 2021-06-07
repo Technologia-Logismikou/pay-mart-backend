@@ -4,6 +4,7 @@ import { Repository } from 'typeorm';
 import { Store } from './stores.entity';
 import { CreateStoreDto } from './dto/create-store.dto';
 import { UpdateStoreDto } from './dto/update-store.dto';
+import { Seller } from '../sellers/sellers.entity';
 
 @Injectable()
 export class StoresService {
@@ -12,7 +13,7 @@ export class StoresService {
     private readonly storesRepository: Repository<Store>,
   ) {}
 
-  create(createStoreDto: CreateStoreDto) {
+  create(createStoreDto: CreateStoreDto & { seller: Seller }) {
     const store = this.storesRepository.create(createStoreDto);
     return this.storesRepository.save(store);
   }
