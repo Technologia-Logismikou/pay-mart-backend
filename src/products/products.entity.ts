@@ -13,7 +13,7 @@ export class Product extends BaseEntity {
   @Column({ nullable: true })
   description: string;
 
-  @Column({ nullable: true })
+  @Column('float4', { nullable: true })
   price: number;
 
   @Column('varchar', { array: true, nullable: true })
