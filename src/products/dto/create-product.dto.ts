@@ -14,7 +14,7 @@ export class CreateProductDto {
   @ApiProperty()
   price: number;
 
-  @ApiProperty()
+  @ApiProperty({ format: 'binary' })
   photos: string[];
 
   @ApiProperty()

@@ -6,8 +6,12 @@ import {
   Delete,
   Body,
   Param,
+  UseInterceptors,
+  UploadedFiles,
 } from '@nestjs/common';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiTags, ApiConsumes } from '@nestjs/swagger';
+import { FilesInterceptor } from '@nestjs/platform-express';
+import { omit } from 'lodash';
 import { ProductsService } from './products.service';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
@@ -17,9 +21,17 @@ import { UpdateProductDto } from './dto/update-product.dto';
 export class ProductsController {
   constructor(private readonly productsService: ProductsService) {}
 
+  @ApiConsumes('multipart/form-data')
+  @UseInterceptors(FilesInterceptor('photos'))
   @Post()
-  create(@Body() createProductDto: CreateProductDto) {
-    return this.productsService.create(createProductDto);
+  create(
+    @Body() createProductDto: CreateProductDto,
+    @UploadedFiles() files: Express.Multer.File[],
+  ) {
+    return this.productsService.create({
+      ...omit(createProductDto, 'photos'),
+      photos: files.map((photo) => photo.filename),
+    });
   }
 
   @Get()
@@ -34,11 +46,13 @@ export class ProductsController {
 
   @Put(':id')
   update(@Param('id') id: string, @Body() updateProductDto: UpdateProductDto) {
+    // TODO: Handle photo updates
     return this.productsService.update(id, updateProductDto);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
+    // TODO: Handle photo deletion
     return this.productsService.remove(id);
   }
 }
