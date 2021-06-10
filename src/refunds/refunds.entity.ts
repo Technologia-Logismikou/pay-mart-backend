@@ -12,6 +12,6 @@ export class Refund extends BaseEntity {
   @JoinColumn()
   order: Order;
 
-  @Column({ nullable: true })
+  @Column('float4', { nullable: true })
   fee: number;
 }

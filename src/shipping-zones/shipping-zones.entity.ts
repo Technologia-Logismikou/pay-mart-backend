@@ -13,6 +13,6 @@ export class ShippingZone extends BaseEntity {
   @Column('varchar', { array: true, nullable: true })
   counties: string[];
 
-  @Column({ nullable: true })
+  @Column('float4', { nullable: true })
   rate: number;
 }

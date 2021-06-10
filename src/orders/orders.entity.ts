@@ -10,7 +10,7 @@ export class Order extends BaseEntity {
   @Column({ nullable: true })
   customer: string;
 
-  @Column({ nullable: true })
+  @Column('float4', { nullable: true })
   amount: number;
 
   // Everypay token
