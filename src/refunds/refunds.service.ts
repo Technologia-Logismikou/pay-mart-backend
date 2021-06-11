@@ -17,7 +17,9 @@ export class RefundsService {
     return this.refundsRepository.save(refund);
   }
 
-  findAll(seller: string) {}
+  findAll(seller: string) {
+    return this.refundsRepository.find();
+  }
 
   findOne(id: string) {
     return this.refundsRepository.findOne(id);
