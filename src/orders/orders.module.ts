@@ -8,8 +8,14 @@ import { CouponsModule } from '../coupons/coupons.module';
 import { SellersModule } from '../sellers/sellers.module';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Order]) , ProductsModule , CouponsModule , SellersModule],
+  imports: [
+    TypeOrmModule.forFeature([Order]),
+    ProductsModule,
+    CouponsModule,
+    SellersModule,
+  ],
   providers: [OrdersService],
   controllers: [OrdersController],
+  exports: [OrdersService],
 })
 export class OrdersModule {}
