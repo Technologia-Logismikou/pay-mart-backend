@@ -6,25 +6,36 @@ import {
   Delete,
   Body,
   Param,
+  Query,
 } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
+import { omit } from 'lodash';
 import { ShippingZonesService } from './shipping-zones.service';
 import { CreateShippingZoneDto } from './dto/create-shipping-zone.dto';
 import { UpdateShippingZoneDto } from './dto/update-shipping-zone.dto';
+import { StoresService } from '../stores/stores.service';
 
 @ApiTags('Shipping Zones')
 @Controller('shipping-zones')
 export class ShippingZonesController {
-  constructor(private readonly shippingZonesService: ShippingZonesService) {}
+  constructor(
+    private readonly shippingZonesService: ShippingZonesService,
+    private readonly storesService: StoresService,
+  ) {}
 
   @Post()
-  create(@Body() createShippingZoneDto: CreateShippingZoneDto) {
-    return this.shippingZonesService.create(createShippingZoneDto);
+  async create(@Body() createShippingZoneDto: CreateShippingZoneDto) {
+    const store = await this.storesService.findOne(createShippingZoneDto.store);
+
+    return this.shippingZonesService.create({
+      ...omit(createShippingZoneDto, 'store'),
+      store,
+    });
   }
 
   @Get()
-  findAll() {
-    return this.shippingZonesService.findAll();
+  findAll(@Query('store') store: string) {
+    return this.shippingZonesService.findAll(store);
   }
 
   @Get(':id')
