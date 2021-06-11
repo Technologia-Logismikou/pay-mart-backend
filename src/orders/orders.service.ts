@@ -4,6 +4,9 @@ import { Repository } from 'typeorm';
 import { Order } from './orders.entity';
 import { CreateOrderDto } from './dto/create-order.dto';
 import { UpdateOrderDto } from './dto/update-order.dto';
+import { Seller } from '../sellers/sellers.entity';
+import { Product } from 'src/products/products.entity';
+import { Coupon } from 'src/coupons/coupons.entity';
 
 @Injectable()
 export class OrdersService {
@@ -12,13 +15,13 @@ export class OrdersService {
     private readonly ordersRepository: Repository<Order>,
   ) {}
 
-  create(createOrderDto: CreateOrderDto) {
+  create(createOrderDto: Omit<CreateOrderDto, 'seller' | 'products' | 'coupon'> & { seller: Seller , products: Product[] , coupon: Coupon }) {
     const order = this.ordersRepository.create(createOrderDto);
     return this.ordersRepository.save(order);
   }
 
-  findAll() {
-    return this.ordersRepository.find();
+  findAll(seller: string) {
+    return this.ordersRepository.find({seller: {id: seller}});
   }
 
   findOne(id: string) {

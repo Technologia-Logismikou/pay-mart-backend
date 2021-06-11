@@ -21,6 +21,10 @@ export class ProductsService {
     return this.productsRepository.find();
   }
 
+  findmany(ids: string[]) {
+    return this.productsRepository.findByIds(ids);
+  }
+
   findOne(id: string) {
     return this.productsRepository.findOne(id);
   }
