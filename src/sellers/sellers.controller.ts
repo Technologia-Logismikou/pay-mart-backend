@@ -39,8 +39,13 @@ export class SellersController {
   }
 
   @Post('login')
-  login(@Body() loginDto: LoginDto) {
-    return this.sellersService.login(loginDto);
+  async login(@Body() loginDto: LoginDto) {
+    const seller = await this.sellersService.login(loginDto);
+
+    if (seller) {
+      const store = await this.storesService.findBySeller(seller.id);
+      return { seller, store };
+    }
   }
 
   @Get()

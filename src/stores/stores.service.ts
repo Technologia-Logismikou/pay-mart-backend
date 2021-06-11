@@ -30,6 +30,10 @@ export class StoresService {
     return this.storesRepository.findOne({ subdomain });
   }
 
+  findBySeller(seller: string) {
+    return this.storesRepository.findOne({ seller: { id: seller } });
+  }
+
   update(id: string, updateStoreDto: UpdateStoreDto) {
     return this.storesRepository.update(id, updateStoreDto);
   }
