@@ -18,6 +18,11 @@ export class StoresController {
     return this.storesService.findOne(id);
   }
 
+  @Get('subdomain/:subdomain')
+  findBySubdomain(@Param('subdomain') subdomain: string) {
+    return this.storesService.findBySubdomain(subdomain);
+  }
+
   @Put(':id')
   update(@Param('id') id: string, @Body() updateStoreDto: UpdateStoreDto) {
     return this.storesService.update(id, updateStoreDto);
