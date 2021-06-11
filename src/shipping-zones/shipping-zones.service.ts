@@ -4,6 +4,7 @@ import { Repository } from 'typeorm';
 import { ShippingZone } from './shipping-zones.entity';
 import { CreateShippingZoneDto } from './dto/create-shipping-zone.dto';
 import { UpdateShippingZoneDto } from './dto/update-shipping-zone.dto';
+import { Store } from '../stores/stores.entity';
 
 @Injectable()
 export class ShippingZonesService {
@@ -12,15 +13,19 @@ export class ShippingZonesService {
     private readonly shippingZonesRepository: Repository<ShippingZone>,
   ) {}
 
-  create(createShippingZoneDto: CreateShippingZoneDto) {
+  create(
+    createShippingZoneDto: Omit<CreateShippingZoneDto, 'store'> & {
+      store: Store;
+    },
+  ) {
     const shippingzone = this.shippingZonesRepository.create(
       createShippingZoneDto,
     );
     return this.shippingZonesRepository.save(shippingzone);
   }
 
-  findAll() {
-    return this.shippingZonesRepository.find();
+  findAll(store: string) {
+    return this.shippingZonesRepository.find({ store: { id: store } });
   }
 
   findOne(id: string) {

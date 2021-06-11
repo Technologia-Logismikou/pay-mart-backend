@@ -4,6 +4,7 @@ import { Repository } from 'typeorm';
 import { Product } from './products.entity';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
+import { Store } from '../stores/stores.entity';
 
 @Injectable()
 export class ProductsService {
@@ -12,13 +13,13 @@ export class ProductsService {
     private readonly productsRepository: Repository<Product>,
   ) {}
 
-  create(createProductDto: CreateProductDto) {
+  create(createProductDto: Omit<CreateProductDto, 'store'> & { store: Store }) {
     const product = this.productsRepository.create(createProductDto);
     return this.productsRepository.save(product);
   }
 
-  findAll() {
-    return this.productsRepository.find();
+  findAll(store: string) {
+    return this.productsRepository.find({ store: { id: store } });
   }
 
   findmany(ids: string[]) {

@@ -16,6 +16,7 @@ export class Product extends BaseEntity {
   @Column('float4', { nullable: true })
   price: number;
 
+  // TODO: Change this to 'images'
   @Column('varchar', { array: true, nullable: true })
   photos: string[];
 

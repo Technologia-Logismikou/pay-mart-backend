@@ -4,6 +4,7 @@ import { Repository } from 'typeorm';
 import { Seller } from './sellers.entity';
 import { CreateSellerDto } from './dto/create-seller.dto';
 import { UpdateSellerDto } from './dto/update-seller.dto';
+import { LoginDto } from './dto/login.dto';
 
 @Injectable()
 export class SellersService {
@@ -15,6 +16,10 @@ export class SellersService {
   create(createSellerDto: Omit<CreateSellerDto, 'store' | 'bankAccount'>) {
     const seller = this.sellersRepository.create(createSellerDto);
     return this.sellersRepository.save(seller);
+  }
+
+  login(loginDto: LoginDto) {
+    return this.sellersRepository.findOne(loginDto);
   }
 
   findAll() {

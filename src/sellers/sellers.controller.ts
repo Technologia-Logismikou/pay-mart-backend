@@ -6,7 +6,6 @@ import {
   Delete,
   Body,
   Param,
-  InternalServerErrorException,
 } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { omit } from 'lodash';
@@ -14,6 +13,7 @@ import { SellersService } from './sellers.service';
 import { CreateSellerDto } from './dto/create-seller.dto';
 import { UpdateSellerDto } from './dto/update-seller.dto';
 import { StoresService } from '../stores/stores.service';
+import { LoginDto } from './dto/login.dto';
 
 @ApiTags('Sellers')
 @Controller('sellers')
@@ -25,20 +25,22 @@ export class SellersController {
 
   @Post()
   async create(@Body() createSellerDto: CreateSellerDto) {
-    /**
-     * Create seller and store on register
-     * TODO: Connect with 3rd party payment service (Everypay)
-     */
     const { store: createStoreDto } = createSellerDto;
     const seller = await this.sellersService.create(
       omit(createSellerDto, 'store', 'bankAccount'),
     );
-    await this.storesService.create({
+    const store = await this.storesService.create({
       ...createStoreDto,
       seller,
     });
 
-    return seller;
+    // Remove 'seller' field from store for duplicate info
+    return { seller, store: omit(store, 'seller') };
+  }
+
+  @Post('login')
+  login(@Body() loginDto: LoginDto) {
+    return this.sellersService.login(loginDto);
   }
 
   @Get()

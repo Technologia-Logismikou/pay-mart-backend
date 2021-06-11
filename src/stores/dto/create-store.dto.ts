@@ -14,6 +14,9 @@ export class CreateStoreDto {
   email: string;
 
   @ApiProperty()
+  color: string;
+
+  @ApiProperty()
   logo: string;
 
   @ApiProperty()

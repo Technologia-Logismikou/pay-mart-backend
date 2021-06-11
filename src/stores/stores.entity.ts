@@ -43,6 +43,9 @@ export class Store extends BaseEntity {
   name: string;
 
   @Column({ nullable: true })
+  color: string;
+
+  @Column({ nullable: true })
   address: string;
 
   @Column({ nullable: true })

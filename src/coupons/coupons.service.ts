@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { Store } from 'src/stores/stores.entity';
 import { Repository } from 'typeorm';
 import { Coupon } from './coupons.entity';
 import { CreateCouponDto } from './dto/create-coupon.dto';
@@ -12,13 +13,13 @@ export class CouponsService {
     private readonly couponsRepository: Repository<Coupon>,
   ) {}
 
-  create(createCouponDto: CreateCouponDto) {
+  create(createCouponDto: Omit<CreateCouponDto, 'store'> & { store: Store }) {
     const coupon = this.couponsRepository.create(createCouponDto);
     return this.couponsRepository.save(coupon);
   }
 
-  findAll() {
-    return this.couponsRepository.find();
+  findAll(store: string) {
+    return this.couponsRepository.find({ store: { id: store } });
   }
 
   findOne(id: string) {

@@ -11,6 +11,8 @@ import { Coupon } from './coupons/coupons.entity';
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { ServeStaticModule } from '@nestjs/serve-static';
+import { join } from 'path';
 import config from './config/configuration';
 import { DatabaseConfig } from './config/types';
 import { ProductsModule } from './products/products.module';
@@ -25,6 +27,13 @@ import { CouponsModule } from './coupons/coupons.module';
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true, load: [config] }),
+    ServeStaticModule.forRoot({
+      rootPath: join(__dirname, '..', 'uploads'),
+      serveRoot: '/uploads',
+      serveStaticOptions: {
+        extensions: ['png', 'jpg'],
+      },
+    }),
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
       useFactory: async (configService: ConfigService) => {
