@@ -28,12 +28,13 @@ export class SellersController {
     const seller = await this.sellersService.create(
       omit(createSellerDto, 'store', 'bankAccount'),
     );
-    await this.storesService.create({
+    const store = await this.storesService.create({
       ...createStoreDto,
       seller,
     });
 
-    return seller;
+    // Remove 'seller' field from store for duplicate info
+    return { seller, store: omit(store, 'seller') };
   }
 
   @Get()
