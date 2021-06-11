@@ -13,6 +13,7 @@ import { SellersService } from './sellers.service';
 import { CreateSellerDto } from './dto/create-seller.dto';
 import { UpdateSellerDto } from './dto/update-seller.dto';
 import { StoresService } from '../stores/stores.service';
+import { LoginDto } from './dto/login.dto';
 
 @ApiTags('Sellers')
 @Controller('sellers')
@@ -35,6 +36,11 @@ export class SellersController {
 
     // Remove 'seller' field from store for duplicate info
     return { seller, store: omit(store, 'seller') };
+  }
+
+  @Post('login')
+  login(@Body() loginDto: LoginDto) {
+    return this.sellersService.login(loginDto);
   }
 
   @Get()
