@@ -1,9 +1,10 @@
-import { Entity, Column, OneToMany } from 'typeorm';
+import { Entity, Column, OneToMany, OneToOne, JoinColumn } from 'typeorm';
 import { BaseEntity } from '../entities/base-entity';
 import { Category } from '../categories/categories.entity';
 import { Product } from '../products/products.entity';
 import { ShippingZone } from '../shipping-zones/shipping-zones.entity';
 import { Coupon } from '../coupons/coupons.entity';
+import { Seller } from '../sellers/sellers.entity';
 
 @Entity()
 export class Store extends BaseEntity {
@@ -30,6 +31,13 @@ export class Store extends BaseEntity {
     nullable: true,
   })
   coupons: Coupon[];
+
+  @OneToOne(() => Seller, {
+    onDelete: 'CASCADE',
+    nullable: true,
+  })
+  @JoinColumn()
+  seller: Seller;
 
   @Column({ nullable: true })
   name: string;
