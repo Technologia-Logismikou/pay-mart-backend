@@ -1,7 +1,10 @@
-// Only list the properties that need to be sent by the seller
 import { ApiProperty } from '@nestjs/swagger';
 
 export class CreateProductDto {
+  // TODO: Delete this after auth
+  @ApiProperty()
+  store: string;
+
   @ApiProperty()
   name: string;
 

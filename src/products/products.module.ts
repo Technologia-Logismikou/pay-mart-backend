@@ -5,6 +5,7 @@ import { diskStorage } from 'multer';
 import { Product } from './products.entity';
 import { ProductsService } from './products.service';
 import { ProductsController } from './products.controller';
+import { StoresModule } from '../stores/stores.module';
 
 @Module({
   imports: [
@@ -31,6 +32,7 @@ import { ProductsController } from './products.controller';
         );
       },
     }),
+    StoresModule,
   ],
   controllers: [ProductsController],
   providers: [ProductsService],

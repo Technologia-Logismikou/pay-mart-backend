@@ -6,6 +6,7 @@ import {
   Delete,
   Body,
   Param,
+  Query,
   UseInterceptors,
   UploadedFiles,
 } from '@nestjs/common';
@@ -15,29 +16,36 @@ import { omit } from 'lodash';
 import { ProductsService } from './products.service';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
+import { StoresService } from '../stores/stores.service';
 
 @ApiTags('Products')
 @Controller('products')
 export class ProductsController {
-  constructor(private readonly productsService: ProductsService) {}
+  constructor(
+    private readonly productsService: ProductsService,
+    private readonly storesService: StoresService,
+  ) {}
 
   @ApiConsumes('multipart/form-data')
   @UseInterceptors(FilesInterceptor('photos'))
   @Post()
-  create(
+  async create(
     @Body() createProductDto: CreateProductDto,
     @UploadedFiles() files: Express.Multer.File[],
   ) {
+    const store = await this.storesService.findOne(createProductDto.store);
+
     // Replace the photos array with the names of the uploaded files
     return this.productsService.create({
-      ...omit(createProductDto, 'photos'),
+      ...omit(createProductDto, 'photos', 'store'),
       photos: files.map((photo) => photo.filename),
+      store,
     });
   }
 
   @Get()
-  findAll() {
-    return this.productsService.findAll();
+  findAll(@Query('store') store: string) {
+    return this.productsService.findAll(store);
   }
 
   @Get(':id')
