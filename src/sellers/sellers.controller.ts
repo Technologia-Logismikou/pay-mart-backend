@@ -6,7 +6,6 @@ import {
   Delete,
   Body,
   Param,
-  InternalServerErrorException,
 } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { omit } from 'lodash';
@@ -25,10 +24,6 @@ export class SellersController {
 
   @Post()
   async create(@Body() createSellerDto: CreateSellerDto) {
-    /**
-     * Create seller and store on register
-     * TODO: Connect with 3rd party payment service (Everypay)
-     */
     const { store: createStoreDto } = createSellerDto;
     const seller = await this.sellersService.create(
       omit(createSellerDto, 'store', 'bankAccount'),

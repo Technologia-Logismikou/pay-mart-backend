@@ -28,6 +28,7 @@ export class ProductsController {
     @Body() createProductDto: CreateProductDto,
     @UploadedFiles() files: Express.Multer.File[],
   ) {
+    // Replace the photos array with the names of the uploaded files
     return this.productsService.create({
       ...omit(createProductDto, 'photos'),
       photos: files.map((photo) => photo.filename),
