@@ -1,6 +1,10 @@
 import { ApiProperty } from '@nestjs/swagger';
 
 export class CreateCouponDto {
+  // TODO: Delete these after auth
+  @ApiProperty()
+  store: string;
+
   @ApiProperty()
   name: string;
 

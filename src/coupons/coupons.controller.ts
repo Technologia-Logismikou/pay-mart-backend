@@ -6,25 +6,33 @@ import {
   Delete,
   Body,
   Param,
+  Query,
 } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
+import { omit } from 'lodash';
 import { CouponsService } from './coupons.service';
 import { CreateCouponDto } from './dto/create-coupon.dto';
 import { UpdateCouponDto } from './dto/update-coupon.dto';
+import { StoresService } from '../stores/stores.service';
 
 @ApiTags('Coupons')
 @Controller('coupons')
 export class CouponsController {
-  constructor(private readonly couponsService: CouponsService) {}
+  constructor(
+    private readonly couponsService: CouponsService,
+    private readonly storesService: StoresService,
+  ) {}
 
   @Post()
-  create(@Body() createCouponDto: CreateCouponDto) {
-    return this.couponsService.create(createCouponDto);
+  async create(@Body() createCouponDto: CreateCouponDto) {
+    const store = await this.storesService.findOne(createCouponDto.store);
+
+    return this.couponsService.create({ ...omit(createCouponDto), store });
   }
 
   @Get()
-  findAll() {
-    return this.couponsService.findAll();
+  findAll(@Query('store') store: string) {
+    return this.couponsService.findAll(store);
   }
 
   @Get(':id')
